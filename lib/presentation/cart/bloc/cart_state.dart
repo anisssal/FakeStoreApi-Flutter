@@ -13,7 +13,7 @@ class CartState with _$CartState {
 
 extension CartStateX on CartState{
   int get totalItem  => items.length;
-  double get totalPrice => items.fold(0, (previousValue, element) => previousValue + element.price);
+  double get totalPrice => items.fold(0, (previousValue, element) => previousValue + (element.price*element.count));
   int get totalItemQtyCount => items.fold(0, (previousValue, element) => previousValue+element.count);
 
 }

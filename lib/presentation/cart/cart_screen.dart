@@ -109,8 +109,8 @@ class CartScreen extends StatelessWidget {
             return SizedBox(
               width: 1.sw,
               height: 1.sw,
-              child: Center(
-                child: Text("No item on the cart.", style: TextStyles.h2,),
+              child: const Center(
+                child: Text("No item on the cart.", style: TextStylesLp.h3,),
               ),
             );
           }
