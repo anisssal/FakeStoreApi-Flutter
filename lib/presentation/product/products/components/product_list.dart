@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/components/error_fetch_data_widget.dart';
+import 'package:flutter_fakestoreapi/presentation/product/product_detail/product_detail_screen.dart';
 import 'package:flutter_fakestoreapi/presentation/product/products/bloc/products_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/product/products/components/product_card.dart';
+import 'package:flutter_fakestoreapi/routing/app_route.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({Key? key}) : super(key: key);
@@ -43,7 +46,12 @@ class ProductList extends StatelessWidget {
                     price: product.price,
                     rate: product.rate,
                     raterCount: product.raterCount,
-                    onPressed: () {});
+                    onPressed: () {
+
+                      GoRouter.of(context).push(RoutePath.productDetail,
+                          extra: ProductDetailScreenArgs.withProduct(
+                              productEntity: product));
+                    });
               }
               return null;
             },

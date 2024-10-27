@@ -69,6 +69,8 @@ dev_dependencies:
 
   freezed: ^2.5.2
   build_runner: ^2.4.9
+  hive_generator: ^2.0.1
+
 
 
 

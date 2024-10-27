@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fakestoreapi/core/styles/dimens.dart';
+import 'package:flutter_fakestoreapi/core/styles/styles.dart';
 import 'package:flutter_fakestoreapi/core/styles/text_styles.dart';
 import 'package:flutter_fakestoreapi/presentation/components/box_shimmer.dart';
 import 'package:flutter_fakestoreapi/presentation/components/network_image_loader.dart';
@@ -63,24 +64,29 @@ class ProductCard extends StatelessWidget {
                       'USD $price',
                       style: TextStyles.h5,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.star,
                           color: Colors.orangeAccent.shade400,
+                          size: 20,
                         ),
                         Text(
                           '$rate',
-                          style: TextStyles.h7,
+                          style: TextStyles.h7.copyWith(
+                              color: ResColor.textSecondary
+                          ),
                         ),
                         const SizedBox(
                           width: 6,
                         ),
                         Text(
-                          '$raterCount Review',
-                          style: TextStyles.h7,
+                          '$raterCount Reviews',
+                          style: TextStyles.h7.copyWith(
+                            color: ResColor.textSecondary
+                          ),
                         ),
                       ],
                     ),

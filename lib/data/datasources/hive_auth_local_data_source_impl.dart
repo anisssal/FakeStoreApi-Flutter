@@ -7,15 +7,11 @@ import 'package:hive/hive.dart';
 class HiveAuthLocalDataSourceImpl implements AuthLocalDataSource {
   static const String tag = 'HiveAuthLocalDataSourceImpl';
 
-
-
   final HiveInterface hiveInterface;
+
   HiveAuthLocalDataSourceImpl({
     required this.hiveInterface,
   });
-
-
-
 
   @override
   Future<String?> getUserToken()async {
