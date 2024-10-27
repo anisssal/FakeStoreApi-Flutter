@@ -16,13 +16,26 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
 
   HiveCartLocalDataSource({
     required this.hiveInterface,
-  }){
-    hiveInterface.registerAdapter(CartHiveModelAdapter());
-  }
+  });
 
   late final _cartStreamCtrl = BehaviorSubject<List<CartEntity>>.seeded(
     const [],
   );
+
+  @override
+  Future<void> initDB() async{
+    hiveInterface.registerAdapter(CartHiveModelAdapter());
+    try {
+      var box = await hiveInterface.openBox(Constants.cartBoxName);
+      var list =
+      box.values.map((e) => (e as CartHiveModel).toEntity()).toList();
+      _cartStreamCtrl.add(list);
+      logDebug.i('$tag getCartData ');
+    } catch (e) {
+      logDebug.e('$tag getCartData', error: e);
+    }
+
+  }
 
   @override
   Future<Unit> addProductToCart(ProductEntity product) async {
@@ -52,46 +65,36 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
   }
 
   @override
-  Future<Unit> changeAmountOfCart(CartEntity cart) async {
-    final streamData = [..._cartStreamCtrl.value];
-    var cartHiveModel = CartHiveModel.fromEntity(cart);
+  Future<Unit> changeAmountOfCart(CartEntity cart, int amount) async {
+    final updatedCartList = [..._cartStreamCtrl.value];
+    var cartModel = CartHiveModel.fromEntity(cart);
+
     try {
-      var box = await hiveInterface.openBox(Constants.cartBoxName);
+      final box = await hiveInterface.openBox(Constants.cartBoxName);
       final hiveIndex = box.values.toList().indexWhere(
-          (el) => (el as CartHiveModel).productId == cartHiveModel.productId);
-      final currentHiveModel =
-          hiveIndex != -1 ? box.getAt(hiveIndex) as CartHiveModel : null;
-      if (currentHiveModel != null) {
-        box.deleteAt(hiveIndex);
-        streamData.remove(currentHiveModel.toEntity());
+            (el) => (el as CartHiveModel).productId == cartModel.productId,
+      );
+
+      if (hiveIndex != -1) {
+        cartModel = cartModel.copyWith(count: amount);
+        box.putAt(hiveIndex, cartModel);
+
+        final streamIndex = updatedCartList.indexWhere(
+              (element) => element.productId == cart.productId,
+        );
+        updatedCartList[streamIndex] = cartModel.toEntity();
       }
-      await box.add(cartHiveModel);
-      streamData.add(cartHiveModel.toEntity());
-      _cartStreamCtrl.add(streamData);
-      logDebug.i('$tag changeAmountOfCart ');
-      return Future.value(unit);
+
+      _cartStreamCtrl.add(updatedCartList);
+      logDebug.i('$tag changeAmountOfCart');
+      return unit;
     } catch (e) {
       logDebug.e('$tag changeAmountOfCart', error: e);
       throw UnknownException();
     }
   }
-
   @override
   Stream<List<CartEntity>> getCartData() {
-    _cartStreamCtrl.isEmpty.then((empty) async {
-      if (empty) {
-        try {
-          var box = await hiveInterface.openBox(Constants.cartBoxName);
-          var list =
-              box.values.map((e) => (e as CartHiveModel).toEntity()).toList();
-          _cartStreamCtrl.add(list);
-          logDebug.i('$tag getCartData ');
-        } catch (e) {
-          logDebug.e('$tag getCartData', error: e);
-        }
-      }
-    });
-
     return _cartStreamCtrl.stream;
   }
 
@@ -110,9 +113,9 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
   }
 
   @override
-  Future<Unit> removeProductFromCart(ProductEntity product) async {
+  Future<Unit> removeProductFromCart(CartEntity product) async {
     final streamData = [..._cartStreamCtrl.value];
-    final cartHiveModel = CartHiveModel.fromProductEntity(product);
+    final cartHiveModel = CartHiveModel.fromEntity(product);
     try {
       var box = await hiveInterface.openBox(Constants.cartBoxName);
       final hiveIndex = box.values.toList().indexWhere(
@@ -129,4 +132,5 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
       throw UnknownException();
     }
   }
+
 }

@@ -480,6 +480,7 @@ mixin _$ProductsState {
   List<ProductEntity> get originProducts => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get searchQuery => throw _privateConstructorUsedError;
+  int get cartCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductsStateCopyWith<ProductsState> get copyWith =>
@@ -497,7 +498,8 @@ abstract class $ProductsStateCopyWith<$Res> {
       List<ProductEntity> products,
       List<ProductEntity> originProducts,
       String category,
-      String searchQuery});
+      String searchQuery,
+      int cartCount});
 }
 
 /// @nodoc
@@ -518,6 +520,7 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
     Object? originProducts = null,
     Object? category = null,
     Object? searchQuery = null,
+    Object? cartCount = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -540,6 +543,10 @@ class _$ProductsStateCopyWithImpl<$Res, $Val extends ProductsState>
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
               as String,
+      cartCount: null == cartCount
+          ? _value.cartCount
+          : cartCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -557,7 +564,8 @@ abstract class _$$ProductsStateImplCopyWith<$Res>
       List<ProductEntity> products,
       List<ProductEntity> originProducts,
       String category,
-      String searchQuery});
+      String searchQuery,
+      int cartCount});
 }
 
 /// @nodoc
@@ -576,6 +584,7 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
     Object? originProducts = null,
     Object? category = null,
     Object? searchQuery = null,
+    Object? cartCount = null,
   }) {
     return _then(_$ProductsStateImpl(
       status: null == status
@@ -598,6 +607,10 @@ class __$$ProductsStateImplCopyWithImpl<$Res>
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
               as String,
+      cartCount: null == cartCount
+          ? _value.cartCount
+          : cartCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -610,7 +623,8 @@ class _$ProductsStateImpl implements _ProductsState {
       required final List<ProductEntity> products,
       required final List<ProductEntity> originProducts,
       required this.category,
-      required this.searchQuery})
+      required this.searchQuery,
+      required this.cartCount})
       : _products = products,
         _originProducts = originProducts;
 
@@ -636,10 +650,12 @@ class _$ProductsStateImpl implements _ProductsState {
   final String category;
   @override
   final String searchQuery;
+  @override
+  final int cartCount;
 
   @override
   String toString() {
-    return 'ProductsState(status: $status, products: $products, originProducts: $originProducts, category: $category, searchQuery: $searchQuery)';
+    return 'ProductsState(status: $status, products: $products, originProducts: $originProducts, category: $category, searchQuery: $searchQuery, cartCount: $cartCount)';
   }
 
   @override
@@ -654,7 +670,9 @@ class _$ProductsStateImpl implements _ProductsState {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.searchQuery, searchQuery) ||
-                other.searchQuery == searchQuery));
+                other.searchQuery == searchQuery) &&
+            (identical(other.cartCount, cartCount) ||
+                other.cartCount == cartCount));
   }
 
   @override
@@ -664,7 +682,8 @@ class _$ProductsStateImpl implements _ProductsState {
       const DeepCollectionEquality().hash(_products),
       const DeepCollectionEquality().hash(_originProducts),
       category,
-      searchQuery);
+      searchQuery,
+      cartCount);
 
   @JsonKey(ignore: true)
   @override
@@ -679,7 +698,8 @@ abstract class _ProductsState implements ProductsState {
       required final List<ProductEntity> products,
       required final List<ProductEntity> originProducts,
       required final String category,
-      required final String searchQuery}) = _$ProductsStateImpl;
+      required final String searchQuery,
+      required final int cartCount}) = _$ProductsStateImpl;
 
   @override
   ProductBlocStatus get status;
@@ -691,6 +711,8 @@ abstract class _ProductsState implements ProductsState {
   String get category;
   @override
   String get searchQuery;
+  @override
+  int get cartCount;
   @override
   @JsonKey(ignore: true)
   _$$ProductsStateImplCopyWith<_$ProductsStateImpl> get copyWith =>

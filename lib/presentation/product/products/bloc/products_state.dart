@@ -9,7 +9,8 @@ class ProductsState with _$ProductsState {
     required List<ProductEntity> products,
     required List<ProductEntity> originProducts,
     required String category ,
-    required String searchQuery
+    required String searchQuery,
+    required int cartCount ,
 })= _ProductsState;
 }
 

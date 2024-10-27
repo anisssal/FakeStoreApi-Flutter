@@ -31,9 +31,9 @@ class CartRepositoryImpl implements CartRepository{
   }
 
   @override
-  Future<Either<Failure, Unit>> changeAmountOfCart(CartEntity cart) async{
+  Future<Either<Failure, Unit>> changeAmountOfCart(CartEntity cart,int amount) async{
     try{
-      return right(await localDataSource.changeAmountOfCart(cart));
+      return right(await localDataSource.changeAmountOfCart(cart, amount));
     }catch(e){
     return left(const Failure.unexpected());
     }
@@ -51,9 +51,9 @@ class CartRepositoryImpl implements CartRepository{
   }
 
   @override
-  Future<Either<Failure, Unit>> removeProductFromCart(ProductEntity product)async {
+  Future<Either<Failure, Unit>> removeProductFromCart(CartEntity item)async {
     try{
-      return right(await localDataSource.removeProductFromCart(product));
+      return right(await localDataSource.removeProductFromCart(item));
     }catch(e){
     return left(const Failure.unexpected());
     }

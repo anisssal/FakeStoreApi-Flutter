@@ -20,6 +20,7 @@ mixin _$CartEntity {
   String get title => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
+  String get imgUrl => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CartEntityCopyWith<CartEntity> get copyWith =>
@@ -32,7 +33,8 @@ abstract class $CartEntityCopyWith<$Res> {
           CartEntity value, $Res Function(CartEntity) then) =
       _$CartEntityCopyWithImpl<$Res, CartEntity>;
   @useResult
-  $Res call({int productId, String title, double price, int count});
+  $Res call(
+      {int productId, String title, double price, int count, String imgUrl});
 }
 
 /// @nodoc
@@ -52,6 +54,7 @@ class _$CartEntityCopyWithImpl<$Res, $Val extends CartEntity>
     Object? title = null,
     Object? price = null,
     Object? count = null,
+    Object? imgUrl = null,
   }) {
     return _then(_value.copyWith(
       productId: null == productId
@@ -70,6 +73,10 @@ class _$CartEntityCopyWithImpl<$Res, $Val extends CartEntity>
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
+      imgUrl: null == imgUrl
+          ? _value.imgUrl
+          : imgUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -82,7 +89,8 @@ abstract class _$$CartEntityImplCopyWith<$Res>
       __$$CartEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int productId, String title, double price, int count});
+  $Res call(
+      {int productId, String title, double price, int count, String imgUrl});
 }
 
 /// @nodoc
@@ -100,6 +108,7 @@ class __$$CartEntityImplCopyWithImpl<$Res>
     Object? title = null,
     Object? price = null,
     Object? count = null,
+    Object? imgUrl = null,
   }) {
     return _then(_$CartEntityImpl(
       productId: null == productId
@@ -118,6 +127,10 @@ class __$$CartEntityImplCopyWithImpl<$Res>
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
               as int,
+      imgUrl: null == imgUrl
+          ? _value.imgUrl
+          : imgUrl // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -129,7 +142,8 @@ class _$CartEntityImpl implements _CartEntity {
       {required this.productId,
       required this.title,
       required this.price,
-      required this.count});
+      required this.count,
+      required this.imgUrl});
 
   @override
   final int productId;
@@ -139,10 +153,12 @@ class _$CartEntityImpl implements _CartEntity {
   final double price;
   @override
   final int count;
+  @override
+  final String imgUrl;
 
   @override
   String toString() {
-    return 'CartEntity(productId: $productId, title: $title, price: $price, count: $count)';
+    return 'CartEntity(productId: $productId, title: $title, price: $price, count: $count, imgUrl: $imgUrl)';
   }
 
   @override
@@ -154,11 +170,13 @@ class _$CartEntityImpl implements _CartEntity {
                 other.productId == productId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.imgUrl, imgUrl) || other.imgUrl == imgUrl));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, productId, title, price, count);
+  int get hashCode =>
+      Object.hash(runtimeType, productId, title, price, count, imgUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -172,7 +190,8 @@ abstract class _CartEntity implements CartEntity {
       {required final int productId,
       required final String title,
       required final double price,
-      required final int count}) = _$CartEntityImpl;
+      required final int count,
+      required final String imgUrl}) = _$CartEntityImpl;
 
   @override
   int get productId;
@@ -182,6 +201,8 @@ abstract class _CartEntity implements CartEntity {
   double get price;
   @override
   int get count;
+  @override
+  String get imgUrl;
   @override
   @JsonKey(ignore: true)
   _$$CartEntityImplCopyWith<_$CartEntityImpl> get copyWith =>

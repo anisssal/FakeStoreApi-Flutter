@@ -6,6 +6,8 @@ import 'package:flutter_fakestoreapi/presentation/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/login_cubit.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/components/login_form.dart';
 import 'package:flutter_fakestoreapi/presentation/components/components.dart';
+import 'package:flutter_fakestoreapi/routing/app_route.dart';
+import 'package:go_router/go_router.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../core/styles/styles.dart';
@@ -19,7 +21,20 @@ class LoginScreen extends StatefulWidget {
   static route() {
     return BlocProvider(
       create: (context) => diContainer<LoginCubit>(),
-      child: const LoginScreen._(),
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          if (state is AuthCheckLoading) {
+            return Container(
+              height: 1.sh,
+              width: 1.sw,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+          return LoginScreen._();
+        },
+      ),
     );
   }
 }
@@ -38,17 +53,17 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         if (state.status == LoginCubitStatus.authenticated) {
           context.read<AuthBloc>().add(const AuthEvent.authenticated());
+          GoRouter.of(context).pushReplacement(RoutePath.home);
         }
-        if(state.status == LoginCubitStatus.unauthenticated){
+        if (state.status == LoginCubitStatus.unauthenticated) {
           toastification.show(
             context: context,
             style: ToastificationStyle.flatColored,
             title: const Text('Username or password incorrect'),
             type: ToastificationType.error,
-            autoCloseDuration: const Duration(seconds: 5),
+            autoCloseDuration: const Duration(seconds: 2),
           );
         }
-
       },
       child: Scaffold(
         body: SingleChildScrollView(

@@ -1,13 +1,16 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fakestoreapi/core/styles/styles.dart';
 import 'package:flutter_fakestoreapi/domain/entities/product_entity.dart';
 import 'package:flutter_fakestoreapi/injection.dart';
+import 'package:flutter_fakestoreapi/presentation/cart/bloc/cart_bloc.dart';
+import 'package:flutter_fakestoreapi/presentation/components/cart_icon_button.dart';
 import 'package:flutter_fakestoreapi/presentation/components/error_fetch_data_widget.dart';
 import 'package:flutter_fakestoreapi/presentation/components/network_image_loader.dart';
 import 'package:flutter_fakestoreapi/presentation/product/product_detail/bloc/product_detail_cubit.dart';
+import 'package:flutter_fakestoreapi/presentation/product/product_detail/components/product_detail_bottom_bar.dart';
+import 'package:flutter_fakestoreapi/routing/app_route.dart';
 import 'package:go_router/go_router.dart';
 
 part 'product_detail_screen_args.dart';
@@ -30,66 +33,19 @@ class ProductDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          BlocBuilder<ProductDetailCubit, ProductDetailState>(
+          BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {
-              return IconButton(
-                  tooltip: "Cart",
-                  onPressed: () {
-                    //   go to cart page
-                  },
-                  icon: Badge(
-                    isLabelVisible: true,
-                    label: Text("${state.cartCount}"),
-                    offset: const Offset(8, 8),
-                    backgroundColor: ResColor.errorColor,
-                    child: const Icon(
-                      Icons.shopping_cart_outlined,
-                    ),
-                  ));
+              return CartIconButton(
+                onPressed: () {
+                  GoRouter.of(context).push(RoutePath.cart);
+                },
+                cartCount: state.totalItemQtyCount,
+              );
             },
           ),
         ],
       ),
-      bottomNavigationBar: BlocBuilder<ProductDetailCubit, ProductDetailState>(
-        builder: (context, state) {
-          if (state.status != ProductDetailCubitStatus.successAddToCart &&
-              state.status != ProductDetailCubitStatus.completed) {
-            return Container();
-          }
-          return Material(
-            elevation: 5.0,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8 ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.15),
-                    spreadRadius: 3,
-                    blurRadius: 6,
-                    offset: const Offset(0, -7),
-                  ),
-                ],
-              ),
-              child: ElevatedButton(
-                onPressed: () {
-                  context.read<ProductDetailCubit>().addProductToCart();
-                },
-                child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                    ),
-                    Text("Add to Cart")
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
+      bottomNavigationBar: const ProductDetailBottomBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocBuilder<ProductDetailCubit, ProductDetailState>(

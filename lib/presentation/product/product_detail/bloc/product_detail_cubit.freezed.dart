@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$ProductDetailState {
   ProductDetailCubitStatus get status => throw _privateConstructorUsedError;
-  int get cartCount => throw _privateConstructorUsedError;
   ProductEntity? get productEntity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,10 +30,7 @@ abstract class $ProductDetailStateCopyWith<$Res> {
           ProductDetailState value, $Res Function(ProductDetailState) then) =
       _$ProductDetailStateCopyWithImpl<$Res, ProductDetailState>;
   @useResult
-  $Res call(
-      {ProductDetailCubitStatus status,
-      int cartCount,
-      ProductEntity? productEntity});
+  $Res call({ProductDetailCubitStatus status, ProductEntity? productEntity});
 
   $ProductEntityCopyWith<$Res>? get productEntity;
 }
@@ -53,7 +49,6 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
   @override
   $Res call({
     Object? status = null,
-    Object? cartCount = null,
     Object? productEntity = freezed,
   }) {
     return _then(_value.copyWith(
@@ -61,10 +56,6 @@ class _$ProductDetailStateCopyWithImpl<$Res, $Val extends ProductDetailState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProductDetailCubitStatus,
-      cartCount: null == cartCount
-          ? _value.cartCount
-          : cartCount // ignore: cast_nullable_to_non_nullable
-              as int,
       productEntity: freezed == productEntity
           ? _value.productEntity
           : productEntity // ignore: cast_nullable_to_non_nullable
@@ -93,10 +84,7 @@ abstract class _$$ProductDetailStateImplCopyWith<$Res>
       __$$ProductDetailStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {ProductDetailCubitStatus status,
-      int cartCount,
-      ProductEntity? productEntity});
+  $Res call({ProductDetailCubitStatus status, ProductEntity? productEntity});
 
   @override
   $ProductEntityCopyWith<$Res>? get productEntity;
@@ -114,7 +102,6 @@ class __$$ProductDetailStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = null,
-    Object? cartCount = null,
     Object? productEntity = freezed,
   }) {
     return _then(_$ProductDetailStateImpl(
@@ -122,10 +109,6 @@ class __$$ProductDetailStateImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as ProductDetailCubitStatus,
-      cartCount: null == cartCount
-          ? _value.cartCount
-          : cartCount // ignore: cast_nullable_to_non_nullable
-              as int,
       productEntity: freezed == productEntity
           ? _value.productEntity
           : productEntity // ignore: cast_nullable_to_non_nullable
@@ -138,20 +121,16 @@ class __$$ProductDetailStateImplCopyWithImpl<$Res>
 
 class _$ProductDetailStateImpl implements _ProductDetailState {
   const _$ProductDetailStateImpl(
-      {required this.status,
-      required this.cartCount,
-      required this.productEntity});
+      {required this.status, required this.productEntity});
 
   @override
   final ProductDetailCubitStatus status;
-  @override
-  final int cartCount;
   @override
   final ProductEntity? productEntity;
 
   @override
   String toString() {
-    return 'ProductDetailState(status: $status, cartCount: $cartCount, productEntity: $productEntity)';
+    return 'ProductDetailState(status: $status, productEntity: $productEntity)';
   }
 
   @override
@@ -160,15 +139,12 @@ class _$ProductDetailStateImpl implements _ProductDetailState {
         (other.runtimeType == runtimeType &&
             other is _$ProductDetailStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            (identical(other.cartCount, cartCount) ||
-                other.cartCount == cartCount) &&
             (identical(other.productEntity, productEntity) ||
                 other.productEntity == productEntity));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, status, cartCount, productEntity);
+  int get hashCode => Object.hash(runtimeType, status, productEntity);
 
   @JsonKey(ignore: true)
   @override
@@ -181,13 +157,10 @@ class _$ProductDetailStateImpl implements _ProductDetailState {
 abstract class _ProductDetailState implements ProductDetailState {
   const factory _ProductDetailState(
       {required final ProductDetailCubitStatus status,
-      required final int cartCount,
       required final ProductEntity? productEntity}) = _$ProductDetailStateImpl;
 
   @override
   ProductDetailCubitStatus get status;
-  @override
-  int get cartCount;
   @override
   ProductEntity? get productEntity;
   @override

@@ -10,6 +10,7 @@ class CartEntity with _$CartEntity {
     required String title,
     required double price,
     required int count,
+    required String imgUrl
 }) = _CartEntity;
 
 }

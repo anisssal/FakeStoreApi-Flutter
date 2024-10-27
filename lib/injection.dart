@@ -15,6 +15,7 @@ import 'package:flutter_fakestoreapi/domain/repositories/cart_repository.dart';
 import 'package:flutter_fakestoreapi/domain/repositories/product_repository.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/login_cubit.dart';
+import 'package:flutter_fakestoreapi/presentation/cart/bloc/cart_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/product/product_detail/bloc/product_detail_cubit.dart';
 import 'package:flutter_fakestoreapi/presentation/product/products/bloc/products_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -49,7 +50,12 @@ void setupDependencies() async {
   diContainer
       .registerFactory<AuthBloc>(() => AuthBloc(authRepository: diContainer()));
   diContainer.registerFactory<ProductsBloc>(
-      () => ProductsBloc(productRepository: diContainer()));
+      () => ProductsBloc(productRepository: diContainer(), cartRepository: diContainer()));
   diContainer.registerFactory<ProductDetailCubit>(() => ProductDetailCubit(
       cartRepository: diContainer(), productRepository: diContainer()));
+  diContainer.registerFactory<CartBloc>(() => CartBloc(
+      cartRepository: diContainer(),));
+
+  diContainer<CartLocalDataSource>().initDB();
+
 }

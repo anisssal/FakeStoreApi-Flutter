@@ -18,23 +18,26 @@ class CartHiveModelAdapter extends TypeAdapter<CartHiveModel> {
     };
     return CartHiveModel(
       productId: fields[0] as int,
+      imgUrl: fields[2] as String,
       title: fields[1] as String,
-      price: fields[2] as double,
-      count: fields[3] as int,
+      price: fields[3] as double,
+      count: fields[4] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, CartHiveModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.productId)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.price)
+      ..write(obj.imgUrl)
       ..writeByte(3)
+      ..write(obj.price)
+      ..writeByte(4)
       ..write(obj.count);
   }
 

@@ -47,7 +47,6 @@ class ProductList extends StatelessWidget {
                     rate: product.rate,
                     raterCount: product.raterCount,
                     onPressed: () {
-
                       GoRouter.of(context).push(RoutePath.productDetail,
                           extra: ProductDetailScreenArgs.withProduct(
                               productEntity: product));

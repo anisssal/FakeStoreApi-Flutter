@@ -5,6 +5,7 @@ import 'package:flutter_fakestoreapi/core/utils/contants.dart';
 import 'package:flutter_fakestoreapi/core/utils/environments.dart';
 import 'package:flutter_fakestoreapi/injection.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/auth_bloc.dart';
+import 'package:flutter_fakestoreapi/presentation/cart/bloc/cart_bloc.dart';
 import 'package:flutter_fakestoreapi/routing/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -27,8 +28,17 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         enableScaleText: () => false,
         splitScreenMode: false,
-        child: BlocProvider(
-          create: (context) => diContainer<AuthBloc>()..add(const AuthEvent.checkAuthStatus()),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+              diContainer<AuthBloc>()
+                ..add(const AuthEvent.checkAuthStatus()),
+            ),
+            BlocProvider(
+              create: (context) => diContainer<CartBloc>()..add(const CartEvent.getCartItems()),
+            ),
+          ],
           child: FakeStoreApiApp(),
         ));
   }

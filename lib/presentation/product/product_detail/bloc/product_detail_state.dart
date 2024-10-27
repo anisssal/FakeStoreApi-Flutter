@@ -6,7 +6,6 @@ enum ProductDetailCubitStatus { initial, successAddToCart, loading, completed, f
 class ProductDetailState with _$ProductDetailState {
   const factory ProductDetailState({
     required ProductDetailCubitStatus status,
-    required int cartCount,
     required ProductEntity? productEntity,
 }) = _ProductDetailState;
 
