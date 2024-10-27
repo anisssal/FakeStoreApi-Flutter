@@ -30,9 +30,7 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
       var list =
       box.values.map((e) => (e as CartHiveModel).toEntity()).toList();
       _cartStreamCtrl.add(list);
-      logDebug.i('$tag getCartData ');
     } catch (e) {
-      logDebug.e('$tag getCartData', error: e);
     }
 
   }
@@ -56,10 +54,8 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
       await box.add(cartHiveModel);
       streamData.add(cartHiveModel.toEntity());
       _cartStreamCtrl.add(streamData);
-      logDebug.i('$tag addProductToCart');
       return Future.value(unit);
     } catch (e) {
-      logDebug.i('$tag addProductToCart $e');
       throw UnknownException();
     }
   }
@@ -86,10 +82,8 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
       }
 
       _cartStreamCtrl.add(updatedCartList);
-      logDebug.i('$tag changeAmountOfCart');
       return unit;
     } catch (e) {
-      logDebug.e('$tag changeAmountOfCart', error: e);
       throw UnknownException();
     }
   }
@@ -104,10 +98,8 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
       var box = await hiveInterface.openBox(Constants.cartBoxName);
       box.clear();
       _cartStreamCtrl.add([]);
-      logDebug.i('$tag removeAllProductFromCart ');
       return Future.value(unit);
     } catch (e) {
-      logDebug.e('$tag removeAllProductFromCart', error: e);
       throw UnknownException();
     }
   }
@@ -125,10 +117,8 @@ class HiveCartLocalDataSource implements CartLocalDataSource {
         box.deleteAt(hiveIndex);
       }
       _cartStreamCtrl.add(streamData);
-      logDebug.i('$tag removeAllProductFromCart ');
       return Future.value(unit);
     } catch (e) {
-      logDebug.e('$tag removeAllProductFromCart', error: e);
       throw UnknownException();
     }
   }

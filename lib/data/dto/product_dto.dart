@@ -1,6 +1,8 @@
+import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_fakestoreapi/domain/entities/product_entity.dart';
 
-class ProductDTO {
+class ProductDTO extends Equatable {
   int? id;
   String? title;
   num? price;
@@ -39,9 +41,18 @@ class ProductDTO {
         raterCount: rating?.count ?? 0);
   }
 
+  @override
+  List<Object?> get props => [id,
+    title,
+    price,
+    description,
+    category,
+    image,
+    rating];
+
 }
 
-class ProductRatingDTO {
+class ProductRatingDTO extends Equatable{
   num? rate;
   int? count;
 
@@ -51,5 +62,8 @@ class ProductRatingDTO {
     rate = json['rate'];
     count = json['count'];
   }
+
+  @override
+  List<Object?> get props => [rate, count];
 
 }

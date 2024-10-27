@@ -32,9 +32,9 @@ class HiveAuthLocalDataSourceImpl implements AuthLocalDataSource {
     try {
       var box = await hiveInterface.openBox(Constants.fakestoreapiKey);
       box.put(Constants.userTokenKey, token);
-      logDebug.i('$tag storeUserToken ');
     } catch (e) {
       logDebug.e('$tag storeUserToken', error: e);
+      throw UnknownException();
     }
 
   }
