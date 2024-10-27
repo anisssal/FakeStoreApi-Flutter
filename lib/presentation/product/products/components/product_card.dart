@@ -55,14 +55,14 @@ class ProductCard extends StatelessWidget {
                     Text(
                       title,
                       maxLines: 2,
-                      style: TextStyles.h5.copyWith(
+                      style: TextStylesLp.h5.copyWith(
                         overflow: TextOverflow.ellipsis
                       ),
                     ),
                     const SizedBox(height: defaultPadding * 0.25),
                     Text(
                       'USD $price',
-                      style: TextStyles.h5,
+                      style: TextStylesLp.h5,
                     ),
                     const Spacer(),
                     Row(
@@ -75,7 +75,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         Text(
                           '$rate',
-                          style: TextStyles.h7.copyWith(
+                          style: TextStylesLp.h7.copyWith(
                               color: ResColor.textSecondary
                           ),
                         ),
@@ -84,7 +84,7 @@ class ProductCard extends StatelessWidget {
                         ),
                         Text(
                           '$raterCount Reviews',
-                          style: TextStyles.h7.copyWith(
+                          style: TextStylesLp.h7.copyWith(
                             color: ResColor.textSecondary
                           ),
                         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fakestoreapi/core/styles/styles.dart';
 import 'package:flutter_fakestoreapi/injection.dart';
+import 'package:flutter_fakestoreapi/presentation/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/cart/bloc/cart_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/product/products/bloc/products_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/product/products/components/components.dart';
@@ -27,11 +28,26 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: PopupMenuButton<String>(
+          icon: const Icon(Icons.account_circle, size: 30 ,color: ResColor.primary,),
+          onSelected: (value) {
+            if (value == 'logout') {
+              context.read<AuthBloc>().add(const AuthEvent.logOut());
+            }
+          },
+          itemBuilder: (BuildContext context) => [
+            const PopupMenuItem<String>(
+              value: 'logout',
+              child: Text('Logout'),
+            ),
+          ],
+        ),
         title: Image.asset(
           "assets/images/logo.png",
           fit: BoxFit.cover,
           height: kToolbarHeight - 20,
         ),
+
         actions: [
           BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {

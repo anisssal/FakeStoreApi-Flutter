@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_fakestoreapi/core/theme/theme.dart';
 import 'package:flutter_fakestoreapi/core/utils/contants.dart';
 import 'package:flutter_fakestoreapi/core/utils/environments.dart';
+import 'package:flutter_fakestoreapi/core/utils/logger.dart';
 import 'package:flutter_fakestoreapi/injection.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/cart/bloc/cart_bloc.dart';
 import 'package:flutter_fakestoreapi/routing/router.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
@@ -36,7 +38,9 @@ class MyApp extends StatelessWidget {
                 ..add(const AuthEvent.checkAuthStatus()),
             ),
             BlocProvider(
-              create: (context) => diContainer<CartBloc>()..add(const CartEvent.getCartItems()),
+              create: (context) =>
+              diContainer<CartBloc>()
+                ..add(const CartEvent.getCartItems()),
             ),
           ],
           child: FakeStoreApiApp(),

@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         if (state.status == LoginCubitStatus.authenticated) {
           context.read<AuthBloc>().add(const AuthEvent.authenticated());
-          GoRouter.of(context).pushReplacement(RoutePath.home);
+          GoRouter.of(context).pushReplacement(RoutePath.products);
         }
         if (state.status == LoginCubitStatus.unauthenticated) {
           toastification.show(

@@ -1,16 +1,53 @@
-# flutter_fakestoreapi
+# Store App
+This app using https://fakestoreapi.com/.
 
-A new Flutter project consuming fakestoreapi
+In this project we define several folder for separating concern;  data , domain , presentation.
+<br /><br />
+- Domain => The domain layers is the deepest layer, the domain layer contain only the core of business object => entities and repository contract => usecase. This layer should not be change when we change our datasource or the UI. Domain layer should be totally independent of other layers.
+  <br /><br />
+- Presentation => on this layer we have our page and widgets who can dispatch an event to the bloc as state management for getting data from repository
+  <br /><br />
+- Data =>  the data layer/folder consists of data sources and Repository implementation for the contract that defined on the Domain layer. In this layer we fetch data from some api provider, services, caching data or fetch cached data from local-storage.
 
-## Getting Started
+we also use get_it package as a service locator creating singleton and object instance
+<br />
 
-This project is a starting point for a Flutter application.
+## Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+* Flutter SDK Version : 3.19.6 [Get SDK](https://docs.flutter.dev/development/tools/sdk/releases)
+* Dart SDK Version : 3.3.4
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Try to install release app using app-release.apk file
+
+## Step By Step Run This Project
+* ##### Clone the project
+
+* ##### Checkout the root folder
+
+* ##### create .env.development from .env.example
+```
+cp .env.example .env.development
+```
+
+* #####  Restore the packages
+
+```
+flutter pub get
+```
+
+* ##### Run
+```
+flutter run
+```
+
+
+* ##### Use credential from https://fakestoreapi.com/users to login; example :
+```
+username : johnd
+password : m38rmF$
+```
+
+## Todo
+* [ ] Code coverage to 100%
+* [ ] Integration testing 

@@ -52,14 +52,14 @@ class CartItemCard extends StatelessWidget {
                     Text(
                       title,
                       maxLines: 2,
-                      style: TextStyles.h5
+                      style: TextStylesLp.h5
                           .copyWith(overflow: TextOverflow.ellipsis),
                     ),
                     const SizedBox(height: defaultPadding * 0.25),
                     Text(
                       'USD $price',
                       style:
-                          TextStyles.h5.copyWith(fontWeight: FontWeight.bold),
+                      TextStylesLp.h5.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -71,15 +71,12 @@ class _QtyInputState extends State<QtyInput> {
         ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: ResColor.whiteColor40, width: 1)),
           child: ValueListenableBuilder(
             valueListenable: widget.value,
             builder: (BuildContext context, int value, Widget? child) {
               return Text(
                 '$value',
-                style: TextStyles.h4,
+                style: TextStylesLp.h4,
               );
             },
           ),

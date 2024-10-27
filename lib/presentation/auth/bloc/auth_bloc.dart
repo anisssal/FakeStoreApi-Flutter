@@ -13,7 +13,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       : super(const AuthState.unauthenticated()) {
     on<AuthEvent>((events, emit) async {
       await events.map(
-          logOut: (event) async {},
+          logOut: (event) async {
+            authRepository.storeUserToken('');
+            emit(const AuthState.unauthenticated());
+          },
           checkAuthStatus: (event) async {
             emit(const AuthState.loading());
             final result = await authRepository.getCurrentToken();

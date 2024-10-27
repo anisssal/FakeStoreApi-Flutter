@@ -84,7 +84,7 @@ class ProductDetailScreen extends StatelessWidget {
                       children: [
                         Text(
                           'USD ${product.price}',
-                          style: TextStyles.h5,
+                          style: TextStylesLp.h5,
                         ),
                         const SizedBox(
                           height: defaultPadding,
@@ -92,7 +92,7 @@ class ProductDetailScreen extends StatelessWidget {
                         Text(
                           product.title,
                           style:
-                          TextStyles.h4.copyWith(overflow: TextOverflow.ellipsis),
+                          TextStylesLp.h4.copyWith(overflow: TextOverflow.ellipsis),
                         ),
                         const SizedBox(
                           height: defaultPadding * 0.75,
@@ -107,7 +107,7 @@ class ProductDetailScreen extends StatelessWidget {
                             ),
                             Text(
                               '${product.rate}',
-                              style: TextStyles.h7
+                              style: TextStylesLp.h7
                                   .copyWith(color: ResColor.textSecondary),
                             ),
                             const SizedBox(
@@ -115,7 +115,7 @@ class ProductDetailScreen extends StatelessWidget {
                             ),
                             Text(
                               '${product.raterCount} Reviews',
-                              style: TextStyles.h7
+                              style: TextStylesLp.h7
                                   .copyWith(color: ResColor.textSecondary),
                             ),
                           ],
