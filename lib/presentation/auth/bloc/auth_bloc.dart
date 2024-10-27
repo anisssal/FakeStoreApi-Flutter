@@ -17,7 +17,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           logOut: (event) async{
 
           },
-          checkAuthStatus: (event) {  },
+          checkAuthStatus: (event) async{
+            final result = await authRepository.getCurrentToken();
+            result.fold((l){
+              emit(const AuthState.unauthenticated());
+            }, (r){
+              if(r!=null && r.isNotEmpty) {
+                emit(const AuthState.authenticated());
+              }else{
+                emit(const AuthState.unauthenticated());
+              }
+            });
+          },
           authenticated : (event)async{
             emit(const AuthState.authenticated());
           }

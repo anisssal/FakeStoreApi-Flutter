@@ -27,24 +27,23 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         enableScaleText: () => false,
         splitScreenMode: false,
-        child: FakeStoreApiApp());
+        child: BlocProvider(
+          create: (context) => diContainer<AuthBloc>()..add(const AuthEvent.checkAuthStatus()),
+          child: FakeStoreApiApp(),
+        ));
   }
 }
 
 class FakeStoreApiApp extends StatelessWidget {
-  final authBloc = diContainer<AuthBloc>();
 
   FakeStoreApiApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => authBloc,
-      child: MaterialApp.router(
-        title: Constants.appName,
-        theme: appTheme,
-        routerConfig: appRouter(authBloc),
-      ),
+    return MaterialApp.router(
+      title: Constants.appName,
+      theme: appTheme,
+      routerConfig: appRouter(context.read<AuthBloc>()),
     );
   }
 }

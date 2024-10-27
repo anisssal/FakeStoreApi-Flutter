@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fakestoreapi/core/utils/logger.dart';
 import 'package:flutter_fakestoreapi/injection.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/login_cubit.dart';
@@ -28,6 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    logDebug.i("tes ${context.read<AuthBloc>().state}");
+
     return BlocListener<LoginCubit, LoginState>(
       listenWhen: (previous, current) {
         return previous.status != current.status;

@@ -1,22 +1,23 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_fakestoreapi/core/utils/logger.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/bloc/auth_bloc.dart';
 import 'package:flutter_fakestoreapi/presentation/auth/login_screen.dart';
-import 'package:flutter_fakestoreapi/presentation/products/products_screen.dart';
+import 'package:flutter_fakestoreapi/presentation/product/products/products_screen.dart';
 import 'package:flutter_fakestoreapi/routing/app_route.dart';
 import 'package:go_router/go_router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
- appRouter(AuthBloc authBloc) => GoRouter(
+ GoRouter appRouter(AuthBloc authBloc) => GoRouter(
   initialLocation: RoutePath.home,
   navigatorKey: _rootNavigatorKey,
   routes: [
     GoRoute(
       path: RoutePath.home,
       name: RouteName.home.name,
-      builder: (context, state) =>  const ProductScreen(),
+      builder: (context, state) =>   ProductScreen.route(),
     ),
     GoRoute(
       path: RoutePath.login,
@@ -27,16 +28,13 @@ final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   ],
   refreshListenable: StreamToListenable([authBloc.stream]),
-  // Changes on the listenable will cause the router to refresh its route
   redirect: (context, state) {
     final isAuthenticated = authBloc.state is AuthAuthenticated;
     final isUnAuthenticated = authBloc.state is AuthUnauthenticated;
 
-    // Redirect to the login page if the user is not authenticated, and if authenticated, do not show the login page
     if (isUnAuthenticated && !state.matchedLocation.contains(RoutePath.login)) {
       return RoutePath.login;
     }
-    // Redirect to the home page if the user is authenticated
     else if (isAuthenticated) {
       return RoutePath.home;
     }
